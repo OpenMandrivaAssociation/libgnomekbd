@@ -3,7 +3,7 @@
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.18.0
+Version: 2.18.1
 Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 
@@ -97,5 +97,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.so
 %attr(644,root,root) %{_libdir}/*.la
 %{_libdir}/*.a
-
-
