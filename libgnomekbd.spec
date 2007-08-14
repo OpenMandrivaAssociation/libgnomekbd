@@ -18,6 +18,7 @@ BuildRequires: libgnomeui2-devel
 BuildRequires: libglade2.0-devel
 BuildRequires: libxklavier-devel
 BuildRequires: perl-XML-Parser
+BuildRequires: inttool
 
 %description
 GNOME keyboard indicator plugin
