@@ -1,12 +1,13 @@
 %define major 1
 %define libname	%mklibname gnomekbd  %{major}
+%define libnamedev %mklibname -d gnomekbd
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.18.2
+Version: 2.19.90
 Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
-
+Patch: libgnomekbd-2.19.90-no-werror.patch
 License: LGPL
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -29,18 +30,24 @@ Group:		%{group}
 %description -n %{libname}
 GNOME keyboard library
 
-%package -n %{libname}-devel
+%package -n %{libnamedev}
 Summary:	Static libraries, include files for GNOME
 Group:		Development/GNOME and GTK+
 Provides:	%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}
+Obsoletes: %mklibname -d gnomekbd 1
 
-%description -n %{libname}-devel
+%description -n %{libnamedev}
 Static library and headers file needed in order to develop
 applications using the GNOME keyboard library
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch -p1
+intltoolize --force
+aclocal
+autoconf
+automake -a -c
 
 %build
 
@@ -90,7 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_libdir}/libgnomekbd*.so.%{major}*
 
-%files -n %{libname}-devel
+%files -n %{libnamedev}
 %defattr(-,root,root)
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
