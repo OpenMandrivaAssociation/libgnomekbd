@@ -5,9 +5,11 @@
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
 Version: 2.19.90
-Release: %mkrel 1
+Release: %mkrel 2
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
-Patch: libgnomekbd-2.19.90-no-werror.patch
+Patch0: libgnomekbd-2.19.90-no-werror.patch
+# (fc) fix crashes (GNOME bugs #466301, 429907)
+Patch1: libgnomekbd-2.19.90-fixcrashes.patch
 License: LGPL
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -23,10 +25,18 @@ BuildRequires: intltool
 %description
 GNOME keyboard indicator plugin
 
+%package common
+Summary: Files used by GNOME keyboard libraries
+Group: %{group}
+Conflicts:	%{name} < 2.1.90-2mdv
+
+%description common
+Files used by GNOME keyboard library
 
 %package -n %{libname}
 Summary:	Dynamic libraries for GNOME applications
 Group:		%{group}
+Requires:	%{name}-common >= %{version}
 
 %description -n %{libname}
 GNOME keyboard library
@@ -44,7 +54,10 @@ applications using the GNOME keyboard library
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch -p1
+%patch0 -p1 -b .wall
+%patch1 -p1 -b .fixcrashes
+
+#needed by patch0
 intltoolize --force
 aclocal
 autoconf
@@ -71,28 +84,35 @@ desktop-file-install --vendor="" \
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%define schemas desktop_gnome_peripherals_keyboard_xkb
+
 %post
-%post_install_gconf_schemas desktop_gnome_peripherals_keyboard_xkb
 %update_icon_cache hicolor
 
-%preun
-%preun_uninstall_gconf_schemas desktop_gnome_peripherals_keyboard_xkb
+%post common
+%post_install_gconf_schemas %{schemas}
 
-%postun
+%preun common
+%preun_uninstall_gconf_schemas %{schemas}
+
+%postun common
 %clean_icon_cache hicolor
 
 %post -n %{libname} -p /sbin/ldconfig
   
 %postun -n %{libname} -p /sbin/ldconfig
 
-%files -f %name.lang
+%files 
 %defattr(-,root,root)
 %doc NEWS ChangeLog
-%{_sysconfdir}/gconf/schemas/desktop_gnome_peripherals_keyboard_xkb.schemas
 %_bindir/gkbd-indicator-plugins-capplet
 %_datadir/applications/gkbd-indicator-plugins-capplet.desktop
 %_datadir/libgnomekbd/
 %_datadir/icons/hicolor/48x48/apps/gkbd-indicator-plugins-capplet.png
+
+%files common -f %name.lang
+%defattr(-,root,root)
+%{_sysconfdir}/gconf/schemas/desktop_gnome_peripherals_keyboard_xkb.schemas
 
 %files -n %{libname}
 %defattr(-,root,root)
