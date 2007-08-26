@@ -4,12 +4,10 @@
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.19.90
-Release: %mkrel 2
+Version: 2.19.91
+Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0: libgnomekbd-2.19.90-no-werror.patch
-# (fc) fix crashes (GNOME bugs #466301, 429907)
-Patch1: libgnomekbd-2.19.90-fixcrashes.patch
 License: LGPL
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -55,7 +53,6 @@ applications using the GNOME keyboard library
 %prep
 %setup -q -n %{name}-%{version}
 %patch0 -p1 -b .wall
-%patch1 -p1 -b .fixcrashes
 
 #needed by patch0
 intltoolize --force
