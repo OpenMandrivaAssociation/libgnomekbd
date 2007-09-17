@@ -4,7 +4,7 @@
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.19.91
+Version: 2.20.0
 Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0: libgnomekbd-2.19.90-no-werror.patch
