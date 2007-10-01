@@ -5,7 +5,7 @@
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
 Version: 2.20.0
-Release: %mkrel 1
+Release: %mkrel 2
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0: libgnomekbd-2.19.90-no-werror.patch
 License: LGPL
@@ -27,6 +27,7 @@ GNOME keyboard indicator plugin
 Summary: Files used by GNOME keyboard libraries
 Group: %{group}
 Conflicts:	%{name} < 2.1.90-2mdv
+Conflicts:	gnome-control-center < 2.18.0
 
 %description common
 Files used by GNOME keyboard library
