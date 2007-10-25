@@ -1,11 +1,11 @@
-%define major 1
+%define major 2
 %define libname	%mklibname gnomekbd  %{major}
 %define libnamedev %mklibname -d gnomekbd
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.20.0
-Release: %mkrel 2
+Version: 2.21.1
+Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0: libgnomekbd-2.19.90-no-werror.patch
 License: LGPL
