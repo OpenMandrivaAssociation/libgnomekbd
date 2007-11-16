@@ -7,6 +7,7 @@ Name: libgnomekbd
 Version: 2.21.1
 Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
+# remove hardcoded Werror (GNOME bug #497425)
 Patch0: libgnomekbd-2.19.90-no-werror.patch
 License: LGPL
 Group: System/Libraries
