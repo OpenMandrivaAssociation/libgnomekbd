@@ -12,7 +12,6 @@ Patch0: libgnomekbd-2.19.90-no-werror.patch
 License: LGPL
 Group: System/Libraries
 Url: http://www.gnome.org/
-BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires: dbus-glib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: libgnomeui2-devel
