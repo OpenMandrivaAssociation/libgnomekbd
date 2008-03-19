@@ -4,8 +4,8 @@
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.21.4.1
-Release: %mkrel 2
+Version: 2.22.0
+Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 # remove hardcoded Werror (GNOME bug #497425)
 Patch0: libgnomekbd-2.19.90-no-werror.patch
@@ -85,17 +85,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %define schemas desktop_gnome_peripherals_keyboard_xkb
 
-%post
-%update_icon_cache hicolor
-
 %post common
 %post_install_gconf_schemas %{schemas}
 
 %preun common
 %preun_uninstall_gconf_schemas %{schemas}
-
-%postun common
-%clean_icon_cache hicolor
 
 %post -n %{libname} -p /sbin/ldconfig
   
@@ -107,7 +101,6 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/gkbd-indicator-plugins-capplet
 %_datadir/applications/gkbd-indicator-plugins-capplet.desktop
 %_datadir/libgnomekbd/
-%_datadir/icons/hicolor/48x48/apps/gkbd-indicator-plugins-capplet.png
 
 %files common -f %name.lang
 %defattr(-,root,root)
