@@ -4,11 +4,9 @@
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.23.2
+Version: 2.23.91
 Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
-# remove hardcoded Werror (GNOME bug #497425)
-Patch0: libgnomekbd-2.19.90-no-werror.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -54,13 +52,6 @@ applications using the GNOME keyboard library
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0 -p1 -b .wall
-
-#needed by patch0
-intltoolize --force
-aclocal
-autoconf
-automake -a -c
 
 %build
 
