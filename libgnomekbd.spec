@@ -13,10 +13,10 @@ Url: http://www.gnome.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires: dbus-glib-devel
 BuildRequires: desktop-file-utils
-BuildRequires: libgnomeui2-devel
+BuildRequires: gtk2-devel
 BuildRequires: libglade2.0-devel
+BuildRequires: libGConf2-devel
 BuildRequires: libxklavier-devel
-BuildRequires: perl-XML-Parser
 BuildRequires: intltool
 
 %description
