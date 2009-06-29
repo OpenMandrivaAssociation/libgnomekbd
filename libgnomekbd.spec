@@ -1,12 +1,14 @@
-%define major 3
+%define major 4
 %define libname	%mklibname gnomekbd  %{major}
 %define libnamedev %mklibname -d gnomekbd
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
 Version: 2.27.2
-Release: %mkrel 1
+Release: %mkrel 2
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
+#gw rediffed from git, build with libxklavier 4.0
+Patch: libgnomekbd-libxklavier4.0.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -16,7 +18,7 @@ BuildRequires: desktop-file-utils
 BuildRequires: gtk2-devel
 BuildRequires: libglade2.0-devel
 BuildRequires: libGConf2-devel
-BuildRequires: libxklavier-devel
+BuildRequires: libxklavier-devel >= 4.0
 BuildRequires: intltool
 
 %description
@@ -52,6 +54,8 @@ applications using the GNOME keyboard library
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch -p1 -b .libxklavier4.0
+autoconf
 
 %build
 
