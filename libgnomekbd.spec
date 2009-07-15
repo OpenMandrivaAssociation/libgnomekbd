@@ -4,11 +4,9 @@
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.27.2
-Release: %mkrel 3
+Version: 2.27.4
+Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
-#gw rediffed from git, build with libxklavier 4.0
-Patch: libgnomekbd-libxklavier4.0.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -54,8 +52,6 @@ applications using the GNOME keyboard library
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch -p1 -b .libxklavier4.0
-autoconf
 
 %build
 
