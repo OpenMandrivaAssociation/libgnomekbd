@@ -4,7 +4,7 @@
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.28.2
+Version: 2.29.5
 Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 License: LGPLv2+
