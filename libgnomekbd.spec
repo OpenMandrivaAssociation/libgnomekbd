@@ -4,13 +4,9 @@
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.30.0
-Release: %mkrel 2
+Version: 2.30.1
+Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
-#gw fix error in schema, missing default value
-#https://qa.mandriva.com/show_bug.cgi?id=58466
-#https://bugzilla.gnome.org/show_bug.cgi?id=615077
-Patch: libgnomekbd-fix-default-value.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
