@@ -5,7 +5,7 @@
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
 Version: 2.30.1
-Release: %mkrel 2
+Release: %mkrel 3
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 License: LGPLv2+
 Group: System/Libraries
@@ -14,7 +14,6 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires: dbus-glib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: gtk2-devel
-BuildRequires: libglade2.0-devel
 BuildRequires: libGConf2-devel
 BuildRequires: libxklavier-devel >= 4.0
 BuildRequires: intltool
