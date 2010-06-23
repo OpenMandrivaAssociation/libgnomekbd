@@ -4,11 +4,9 @@
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.30.1
-Release: %mkrel 5
+Version: 2.30.2
+Release: %mkrel 1
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
-# (fc) 2.30.1-4mdv various bug fixes (GNOME bug #617643, #618709) (GIT)
-Patch0: libgnomekbd-2.30.1-gitfixes.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
