@@ -5,7 +5,7 @@
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
 Version: 2.31.5
-Release: %mkrel 1
+Release: %mkrel 2
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
 License: LGPLv2+
 Group: System/Libraries
@@ -95,11 +95,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc NEWS ChangeLog
 %_bindir/gkbd-indicator-plugins-capplet
 %_datadir/applications/gkbd-indicator-plugins-capplet.desktop
-%_datadir/libgnomekbd/
 
 %files common -f %name.lang
 %defattr(-,root,root)
 %{_sysconfdir}/gconf/schemas/desktop_gnome_peripherals_keyboard_xkb.schemas
+%_datadir/libgnomekbd/
 
 %files -n %{libname}
 %defattr(-,root,root)
