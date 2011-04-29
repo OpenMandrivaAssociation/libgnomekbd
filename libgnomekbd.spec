@@ -14,7 +14,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires: dbus-glib-devel
 BuildRequires: desktop-file-utils
 BuildRequires: gtk2-devel
-BuildRequires: libGConf2-devel
+BuildRequires: libGConf2-devel GConf2
 BuildRequires: libxklavier-devel >= 4.0
 BuildRequires: intltool
 
