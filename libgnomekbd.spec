@@ -1,22 +1,26 @@
-%define major 4
+%define major 7
+%define girmajor 3.0
+
 %define libname	%mklibname gnomekbd  %{major}
-%define libnamedev %mklibname -d gnomekbd
+%define girname	%mklibname gnomekbd-gir  %{girmajor}
+%define develname %mklibname -d gnomekbd
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 2.32.0
-Release: %mkrel 3
-Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
+Version: 3.2.0
+Release: 1
+Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
-BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
-BuildRequires: dbus-glib-devel
-BuildRequires: desktop-file-utils
-BuildRequires: gtk2-devel
-BuildRequires: libGConf2-devel GConf2
-BuildRequires: libxklavier-devel >= 4.0
+
 BuildRequires: intltool
+BuildRequires: pkgconfig(gdk-3.0) >= 2.91.7
+BuildRequires: pkgconfig(gio-2.0) >= 2.18
+BuildRequires: pkgconfig(glib-2.0) >= 2.18
+BuildRequires: pkgconfig(gtk+-3.0) >= 2.90
+BuildRequires: pkgconfig(libxklavier) >= 5.1
+BuildRequires: pkgconfig(gobject-introspection-1.0) >= 0.6.7
 
 %description
 GNOME keyboard indicator plugin
@@ -24,8 +28,6 @@ GNOME keyboard indicator plugin
 %package common
 Summary: Files used by GNOME keyboard libraries
 Group: %{group}
-Conflicts:	%{name} < 2.1.90-2mdv
-Conflicts:	gnome-control-center < 2.18.0
 
 %description common
 Files used by GNOME keyboard library
@@ -33,82 +35,70 @@ Files used by GNOME keyboard library
 %package -n %{libname}
 Summary:	Dynamic libraries for GNOME applications
 Group:		%{group}
-Requires:	%{name}-common >= %{version}
 
 %description -n %{libname}
 GNOME keyboard library
 
-%package -n %{libnamedev}
-Summary:	Static libraries, include files for GNOME
+%package -n %{girname}
+Summary:	GObject Introspection interface library for %{name}
+Group:		System/Libraries
+Requires:	%{libname} = %{version}-%{release}
+
+%description -n %{girname}
+GObject Introspection interface library for %{name}.
+
+%package -n %{develname}
+Summary:	Development libraries, include files for GNOME
 Group:		Development/GNOME and GTK+
 Provides:	%{name}-devel = %{version}-%{release}
-Requires:	%{libname} = %{version}
-Obsoletes: %mklibname -d gnomekbd 1
+Requires:	%{libname} = %{version}-%{release}
 
-%description -n %{libnamedev}
-Static library and headers file needed in order to develop
+%description -n %{develname}
+Development library and headers file needed in order to develop
 applications using the GNOME keyboard library
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 %apply_patches
 
 %build
+%configure2_5x \
+	--disable-static \
+	-enable-introspection
 
-%configure2_5x
-%make LIBS=-lm
+%make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
+%makeinstall_std
+find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
-GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
-
-%find_lang %name
-desktop-file-install --vendor="" \
-  --remove-category="AdvancedSettings" \
-  --remove-category="Application" \
-  --add-category="X-MandrivaLinux-System-Configuration-GNOME" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
-
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+%find_lang %{name}
 
 %define schemas desktop_gnome_peripherals_keyboard_xkb
-
-%post common
-%post_install_gconf_schemas %{schemas}
 
 %preun common
 %preun_uninstall_gconf_schemas %{schemas}
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-  
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files 
-%defattr(-,root,root)
 %doc NEWS ChangeLog
-%_bindir/gkbd-indicator-plugins-capplet
-%_datadir/applications/gkbd-indicator-plugins-capplet.desktop
+%{_bindir}/gkbd-indicator-plugins-capplet
+%{_datadir}/applications/gkbd-indicator-plugins-capplet.desktop
+%{_bindir}/gkbd-keyboard-display
+%{_datadir}/applications/gkbd-keyboard-display.desktop
 
-%files common -f %name.lang
-%defattr(-,root,root)
+%files common -f %{name}.lang
 %{_sysconfdir}/gconf/schemas/desktop_gnome_peripherals_keyboard_xkb.schemas
-%_datadir/libgnomekbd/
+%{_datadir}/libgnomekbd/
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/libgnomekbd*.so.%{major}*
 
-%files -n %{libnamedev}
-%defattr(-,root,root)
+%files -n %{girname}
+%{_libdir}/girepository-1.0/Gkbd-%{girmajor}.typelib
+
+%files -n %{develname}
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
 %{_libdir}/*.so
-%attr(644,root,root) %{_libdir}/*.la
-%{_libdir}/*.a
+
