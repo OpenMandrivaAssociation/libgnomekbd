@@ -84,11 +84,12 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %doc NEWS ChangeLog
 %{_bindir}/gkbd-indicator-plugins-capplet
 %{_datadir}/applications/gkbd-indicator-plugins-capplet.desktop
-%{_bindir}/gkbd-keyboard-display
-%{_datadir}/applications/gkbd-keyboard-display.desktop
 
 %files common -f %{name}.lang
-%{_sysconfdir}/gconf/schemas/desktop_gnome_peripherals_keyboard_xkb.schemas
+%{_bindir}/gkbd-keyboard-display
+%{_datadir}/applications/gkbd-keyboard-display.desktop
+%{_datadir}/GConf/gsettings/libgnomekbd.convert
+%{_datadir}/glib-2.0/schemas/org.gnome.libgnomekbd*.gschema.xml
 %{_datadir}/libgnomekbd/
 
 %files -n %{libname}
@@ -101,4 +102,5 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
 %{_libdir}/*.so
+%{_datadir}/gir-1.0/Gkbd-3.0.gir
 
