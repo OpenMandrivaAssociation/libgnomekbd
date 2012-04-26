@@ -7,12 +7,12 @@
 
 Summary: GNOME keyboard libraries
 Name: libgnomekbd
-Version: 3.2.0
+Version: 3.4.0.2
 Release: 1
-Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
+Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 
 BuildRequires: intltool
 BuildRequires: pkgconfig(gdk-3.0) >= 2.91.7
@@ -26,8 +26,8 @@ BuildRequires: pkgconfig(gobject-introspection-1.0) >= 0.6.7
 GNOME keyboard indicator plugin
 
 %package common
-Summary: Files used by GNOME keyboard libraries
-Group: %{group}
+Summary:	Files used by GNOME keyboard libraries
+Group:		%{group}
 
 %description common
 Files used by GNOME keyboard library
@@ -42,7 +42,6 @@ GNOME keyboard library
 %package -n %{girname}
 Summary:	GObject Introspection interface library for %{name}
 Group:		System/Libraries
-Requires:	%{libname} = %{version}-%{release}
 
 %description -n %{girname}
 GObject Introspection interface library for %{name}.
@@ -52,6 +51,7 @@ Summary:	Development libraries, include files for GNOME
 Group:		Development/GNOME and GTK+
 Provides:	%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
+Requires:	%{girname} = %{version}-%{release}
 
 %description -n %{develname}
 Development library and headers file needed in order to develop
@@ -69,7 +69,6 @@ applications using the GNOME keyboard library
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
@@ -102,5 +101,5 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
 %{_libdir}/*.so
-%{_datadir}/gir-1.0/Gkbd-3.0.gir
+%{_datadir}/gir-1.0/Gkbd-%{girmajor}.gir
 
