@@ -28,6 +28,7 @@ GNOME keyboard indicator plugin
 %package common
 Summary:	Files used by GNOME keyboard libraries
 Group:		%{group}
+Obsoletes:	libgnomekbd < 3.4.0
 
 %description common
 Files used by GNOME keyboard library
@@ -79,12 +80,8 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %preun common
 %preun_uninstall_gconf_schemas %{schemas}
 
-%files 
-%doc NEWS ChangeLog
-%{_bindir}/gkbd-indicator-plugins-capplet
-%{_datadir}/applications/gkbd-indicator-plugins-capplet.desktop
-
 %files common -f %{name}.lang
+%doc NEWS ChangeLog
 %{_bindir}/gkbd-keyboard-display
 %{_datadir}/applications/gkbd-keyboard-display.desktop
 %{_datadir}/GConf/gsettings/libgnomekbd.convert
