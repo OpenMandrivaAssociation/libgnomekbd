@@ -1,0 +1,13 @@
+diff -p -up ./libgnomekbd/Makefile.in.0000 ./libgnomekbd/Makefile.in
+--- ./libgnomekbd/Makefile.in.0000      2012-02-22 01:03:58.000000000 +0000
++++ ./libgnomekbd/Makefile.in   2012-02-22 19:48:58.610465866 +0000
+@@ -372,7 +372,8 @@ common_LIBADD = \
+                $(GLIB_LIBS) \
+                $(GDK_LIBS) \
+                $(LIBXKLAVIER_LIBS) \
+-               $(XLIB_LIBS)
++               $(XLIB_LIBS) \
++               -lgmodule-2.0
+
+ libgnomekbd_la_LDFLAGS = $(common_LDFLAGS)
+ libgnomekbd_la_LIBADD = $(common_LIBADD)
