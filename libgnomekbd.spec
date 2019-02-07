@@ -9,8 +9,8 @@
 
 Summary:	GNOME keyboard libraries
 Name:		libgnomekbd
-Version:	3.26.0
-Release:	2
+Version:	3.26.1
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
@@ -71,17 +71,16 @@ applications using the GNOME keyboard library
 
 %prep
 %setup -q
-%apply_patches
 
 %build
 %configure2_5x \
 	--disable-static \
 	--enable-introspection
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %find_lang %{name}
 
