@@ -71,17 +71,16 @@ applications using the GNOME keyboard library
 
 %prep
 %setup -q
-%apply_patches
 
 %build
 %configure2_5x \
 	--disable-static \
 	--enable-introspection
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %find_lang %{name}
 
