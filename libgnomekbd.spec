@@ -9,14 +9,14 @@
 
 Summary:	GNOME keyboard libraries
 Name:		libgnomekbd
-Version:	3.26.1
+Version:	3.28.1
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/%{url_ver}/%{name}-%{version}.tar.xz
 
-BuildRequires:	intltool
+BuildRequires:	meson
 BuildRequires:	pkgconfig(gdk-3.0) >= 2.91.7
 BuildRequires:	pkgconfig(gio-2.0) >= 2.18
 BuildRequires:	pkgconfig(glib-2.0) >= 2.18
@@ -73,14 +73,12 @@ applications using the GNOME keyboard library
 %setup -q
 
 %build
-%configure2_5x \
-	--disable-static \
-	--enable-introspection
+%meson
 
-%make_build
+%meson_build
 
 %install
-%make_install
+%meson_install
 
 %find_lang %{name}
 
