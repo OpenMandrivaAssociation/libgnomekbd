@@ -10,7 +10,7 @@
 Summary:	GNOME keyboard libraries
 Name:		libgnomekbd
 Version:	3.28.1
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
