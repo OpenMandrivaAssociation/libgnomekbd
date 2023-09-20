@@ -10,11 +10,11 @@
 Summary:	GNOME keyboard libraries
 Name:		libgnomekbd
 Version:	3.28.1
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		System/Libraries
-Url:		http://www.gnome.org/
-Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/%{url_ver}/%{name}-%{version}.tar.xz
+Url:		https://www.gnome.org/
+Source0:	https://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/%{url_ver}/%{name}-%{version}.tar.xz
 
 BuildRequires:	meson
 BuildRequires:	pkgconfig(gdk-3.0) >= 2.91.7
