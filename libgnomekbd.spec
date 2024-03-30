@@ -16,6 +16,7 @@ Group:		System/Libraries
 Url:		https://www.gnome.org/
 Source0:	https://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/%{url_ver}/%{name}-%{version}.tar.xz
 
+BuildRequires:  gettext
 BuildRequires:	meson
 BuildRequires:	pkgconfig(gdk-3.0) >= 2.91.7
 BuildRequires:	pkgconfig(gio-2.0) >= 2.18
